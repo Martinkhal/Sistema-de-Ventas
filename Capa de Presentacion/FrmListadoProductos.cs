@@ -26,20 +26,20 @@ namespace Capa_de_Presentacion
 
         private void FrmProductos_Load(object sender, EventArgs e)
         {
-            //string user = FrmMenuPrincipal.variable; //obtenemos el nombre de usuario para saber si limitamos opciones al usuario activo.
-            //string cargo = FrmMenuPrincipal.cargoEmpleado;//obtenemos el cargo del usuario logueado para saber si limitamos opciones al usuario.
-            ////if (user != "admin, admin")
+            string user = FrmMenuPrincipal.variable; //obtenemos el nombre de usuario para saber si limitamos opciones al usuario activo.
+            string cargo = FrmMenuPrincipal.cargoEmpleado;//obtenemos el cargo del usuario logueado para saber si limitamos opciones al usuario.
+            //if (user != "admin, admin")
             //{
             //    btnNuevo.Enabled = false;
             //    btnEditar.Enabled = false;
             //}
             //string usuarioLogueado = Program.NombreEmpleadoLogueado.ToString(); //otra forma de limitar el acceso a usuarios que no son administradores
             
-            //if (cargo != "2")//ACA LIMITAMOS EL ACCESO A USUARIOS QUE NO SEAN EL ADMINISTRADOR.
-            //{
-            //    btnNuevo.Enabled = false;
-            //    btnEditar.Enabled = false;
-            //}
+            if (cargo != "2")//ACA LIMITAMOS EL ACCESO A USUARIOS QUE NO SEAN EL ADMINISTRADOR.
+            {
+                btnNuevo.Enabled = false;
+                btnEditar.Enabled = false;
+            }
 
             timer1.Start();
             timer1.Interval = 5000;

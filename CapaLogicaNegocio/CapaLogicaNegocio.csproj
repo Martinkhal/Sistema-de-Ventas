@@ -93,8 +93,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsCargo.cs" />
     <Compile Include="clsCategoria.cs" />
+    <Compile Include="clsCliente.cs" />
+    <Compile Include="clsEmpleado.cs" />
     <Compile Include="clsProducto.cs" />
+    <Compile Include="clsConsulta.cs" />
+    <Compile Include="clsUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

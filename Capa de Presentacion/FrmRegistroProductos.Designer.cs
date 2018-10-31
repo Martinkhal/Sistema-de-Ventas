@@ -222,7 +222,7 @@
             // 
             this.btnCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCategoria.ForeColor = System.Drawing.Color.Black;
-            this.btnCategoria.Location = new System.Drawing.Point(618, 89);
+            this.btnCategoria.Location = new System.Drawing.Point(309, 21);
             this.btnCategoria.Name = "btnCategoria";
             this.btnCategoria.Size = new System.Drawing.Size(97, 27);
             this.btnCategoria.TabIndex = 16;
@@ -282,7 +282,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(541, 246);
+            this.ClientSize = new System.Drawing.Size(534, 246);
             this.Controls.Add(this.txtStockMinimo);
             this.Controls.Add(this.labelSockMinimo);
             this.Controls.Add(this.btnEliminar);

@@ -59,42 +59,62 @@ namespace Capa_de_Presentacion
                             {
                                 if (txtStockMinimo.Text.Trim() != "")
                                 {
-                                    if (Program.Evento == 0) //////////////////////////////////////
+                                    decimal precioCompra = Convert.ToDecimal(txtPCompra.Text);
+                                    decimal precioVenta = Convert.ToDecimal(txtPVenta.Text);
+                                    if (precioCompra < precioVenta)
                                     {
-                                        P.IdCategoria = Convert.ToInt32(cbxCategoria.SelectedValue);
-                                        P.Producto = txtProducto.Text;
-                                        P.Marca = txtMarca.Text;
-                                        P.PrecioCompra = Convert.ToDecimal(txtPCompra.Text);
-                                        P.PrecioVenta = Convert.ToDecimal(txtPVenta.Text);
-                                        P.Stock = Convert.ToInt32(txtStock.Text);
-                                        P.StockMinimo = Convert.ToInt32(txtStockMinimo.Text);
-                                        P.FechaVencimiento = Convert.ToDateTime(dateTimePicker1.Value);
-                                        Mensaje = P.RegistrarProductos();
-                                        if (Mensaje == "Este Producto ya ha sido Registrado.")
+                                        DateTime fechaVencimiento = Convert.ToDateTime(dateTimePicker1.Value);
+                                        DateTime fechaActual = DateTime.Now;
+                                        if (fechaVencimiento > fechaActual)
                                         {
-                                            DevComponents.DotNetBar.MessageBoxEx.Show(Mensaje, "Sistema de Ventas.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                            if (Program.Evento == 0) //////////////////////////////////////
+                                            {
+                                                P.IdCategoria = Convert.ToInt32(cbxCategoria.SelectedValue);
+                                                P.Producto = txtProducto.Text;
+                                                P.Marca = txtMarca.Text;
+                                                P.PrecioCompra = Convert.ToDecimal(txtPCompra.Text);
+                                                P.PrecioVenta = Convert.ToDecimal(txtPVenta.Text);
+                                                P.Stock = Convert.ToInt32(txtStock.Text);
+                                                P.StockMinimo = Convert.ToInt32(txtStockMinimo.Text);
+                                                P.FechaVencimiento = Convert.ToDateTime(dateTimePicker1.Value);
+                                                Mensaje = P.RegistrarProductos();
+                                                if (Mensaje == "Este Producto ya ha sido Registrado.")
+                                                {
+                                                    DevComponents.DotNetBar.MessageBoxEx.Show(Mensaje, "Sistema de Ventas.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                                }
+                                                else
+                                                {
+                                                    DevComponents.DotNetBar.MessageBoxEx.Show(Mensaje, "Sistema de Ventas.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                    Limpiar();
+                                                }
+                                            }
+                                            else
+                                            {
+                                                P.IdP = Convert.ToInt32(txtIdP.Text);//CDA05
+                                                P.IdCategoria = Convert.ToInt32(cbxCategoria.SelectedValue);
+                                                P.Producto = txtProducto.Text;
+                                                P.Marca = txtMarca.Text;
+                                                P.PrecioCompra = Convert.ToDecimal(txtPCompra.Text);
+                                                P.PrecioVenta = Convert.ToDecimal(txtPVenta.Text);
+                                                P.Stock = Convert.ToInt32(txtStock.Text);
+                                                P.StockMinimo = Convert.ToInt32(txtStockMinimo.Text);//CDA05
+                                                P.FechaVencimiento = Convert.ToDateTime(dateTimePicker1.Value);
+                                                DevComponents.DotNetBar.MessageBoxEx.Show(P.ActualizarProductos(), "Sistema de Ventas.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                Limpiar();
+                                                this.Close();//que cierre la ventana una vez que modifico con exito.
+                                            }
                                         }
                                         else
                                         {
-                                            DevComponents.DotNetBar.MessageBoxEx.Show(Mensaje, "Sistema de Ventas.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                            Limpiar();
+                                            DevComponents.DotNetBar.MessageBoxEx.Show("La Fecha de Vencimiento del Producto no puede ser menor o igual a la fecha de hoy. Verifique.", "Sistema de Ventas.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            dateTimePicker1.Focus();
                                         }
                                     }
                                     else
                                     {
-                                        P.IdP = Convert.ToInt32(txtIdP.Text);//CDA05
-                                        P.IdCategoria = Convert.ToInt32(cbxCategoria.SelectedValue);
-                                        P.Producto = txtProducto.Text;
-                                        P.Marca = txtMarca.Text;
-                                        P.PrecioCompra = Convert.ToDecimal(txtPCompra.Text);
-                                        P.PrecioVenta = Convert.ToDecimal(txtPVenta.Text);
-                                        P.Stock = Convert.ToInt32(txtStock.Text);
-                                        P.StockMinimo = Convert.ToInt32(txtStockMinimo.Text);//CDA05
-                                        P.FechaVencimiento = Convert.ToDateTime(dateTimePicker1.Value);
-                                        DevComponents.DotNetBar.MessageBoxEx.Show(P.ActualizarProductos(), "Sistema de Ventas.", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                        Limpiar();
-                                        this.Close();//que cierre la ventana una vez que modifico con exito.
-                                    }
+                                        DevComponents.DotNetBar.MessageBoxEx.Show("El precio de Venta no puede ser menor que el precio de Compra. Verifique.", "Sistema de Ventas.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        txtPVenta.Focus();
+                                    } 
                                 }
                                 else
                                 {
@@ -126,7 +146,8 @@ namespace Capa_de_Presentacion
                     txtMarca.Focus();
                 }
             }
-            else {
+            else
+            {
                 DevComponents.DotNetBar.MessageBoxEx.Show("Por Favor Ingrese Nombre del Producto.", "Sistema de Ventas.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtProducto.Focus();
             }
@@ -136,18 +157,18 @@ namespace Capa_de_Presentacion
 
         private void btnCategoria_Click(object sender, EventArgs e)
         {
-            ////FrmRegistrarCategoria C = new FrmRegistrarCategoria();
-            ////C.Show();
-            //Form frm = Application.OpenForms.Cast<Form>().FirstOrDefault(x => x is FrmRegistrarCategoria);
-            //if (frm != null)
-            //{
-            //    //si la instancia existe la pongo en primer plano
-            //    frm.BringToFront();
-            //    return;
-            //}
-            ////sino existe la instancia se crea una nueva
-            //frm = new FrmRegistrarCategoria();
-            //frm.Show();
+            //FrmRegistrarCategoria C = new FrmRegistrarCategoria();
+            //C.Show();
+            Form frm = Application.OpenForms.Cast<Form>().FirstOrDefault(x => x is FrmRegistrarCategoria);
+            if (frm != null)
+            {
+                //si la instancia existe la pongo en primer plano
+                frm.BringToFront();
+                return;
+            }
+            //sino existe la instancia se crea una nueva
+            frm = new FrmRegistrarCategoria();
+            frm.Show();
         }
 
         private void Limpiar() {
@@ -165,10 +186,10 @@ namespace Capa_de_Presentacion
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            if (DevComponents.DotNetBar.MessageBoxEx.Show("¿Está Seguro que Desea Salir.?", "Sistema de Ventas.", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes) {
+            if (DevComponents.DotNetBar.MessageBoxEx.Show("¿Está Seguro que Desea Salir.?", "Sistema de Ventas.", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+            {
                 this.Close();
             }
-
         }
 
         private void txtPCompra_KeyPress(object sender, KeyPressEventArgs e)

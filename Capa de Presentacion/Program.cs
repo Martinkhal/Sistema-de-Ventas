@@ -13,6 +13,12 @@ namespace Capa_de_Presentacion
         /// </summary>
          public static int Evento;
 
+        //Datos del Cliente
+         public static int IdCliente;
+         public static String DocumentoIdentidad;
+         public static String NombreCliente;
+         public static String ApellidosCliente;
+
         //Datos del Producto
          public static int IdProducto;
          public static String Descripcion;
@@ -20,13 +26,22 @@ namespace Capa_de_Presentacion
          public static Int32 Stock;
          public static Int32 StockMinimo;
          public static Decimal PrecioVenta;
+
+        //Datos del Empleado
+         public static int IdCargo;
+         public static String EstadoCivil="";
+         public static int IdEmpleado;
+
+        //Variables de Sesion
+        public static int IdEmpleadoLogueado;
+        public static String NombreEmpleadoLogueado;
  
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmListadoProductos());      
+            Application.Run(new FrmLogin());      
         }
     }
 }
